@@ -34,16 +34,16 @@ public class KafkaConfiguracoes {
     }
 
     @Bean
-    public ConsumerFactory<String, Transacoes> transactionConsumerFactory() {
+    public ConsumerFactory<String, TransacoesRetorno> transactionConsumerFactory() {
         StringDeserializer stringDeserializer = new StringDeserializer();
-        JsonDeserializer<Transacoes> jsonDeserializer = new JsonDeserializer<>(Transacoes.class, false);
+        JsonDeserializer<TransacoesRetorno> jsonDeserializer = new JsonDeserializer<>(TransacoesRetorno.class, false);
 
         return new DefaultKafkaConsumerFactory<>(consumerConfigurations(), stringDeserializer, jsonDeserializer);
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Transacoes> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, Transacoes> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, TransacoesRetorno> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, TransacoesRetorno> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(transactionConsumerFactory());
 
         return factory;
